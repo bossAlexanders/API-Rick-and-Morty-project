@@ -1,54 +1,86 @@
-1. API Integration
-Connects to the public Rick and Morty API (https://rickandmortyapi.com)
+# Rick and Morty API Integration — Data Processing Pipeline
 
-Fetches detailed character information by ID
+## Overview
+This project demonstrates an end-to-end data processing workflow using the public  
+**Rick and Morty API**: https://rickandmortyapi.com
 
-Includes robust error handling for HTTP requests
+The script fetches character data by ID, writes it to temporary files, processes the data,
+and ensures proper cleanup.
 
-2. Data Processing Pipeline
-Fetch: Retrieves character data (ID, name, status)
+---
 
-Write: Saves formatted data to temporary files
+## API Integration
+- Connects to the public Rick and Morty API
+- Fetches detailed character information by **ID**
+- Retrieves the following fields:
+  - `id`
+  - `name`
+  - `status`
+- Includes robust HTTP error handling
 
-Filter: Reads and displays lines excluding those containing 'i'
+---
 
-Cleanup: Automatically removes generated files
+## Data Processing Pipeline
 
-3. File Operations
-Creates temporary text files with structured data
+### 1. Fetch
+- Retrieves character data from the API
 
-Renames files during processing
+### 2. Write
+- Saves formatted character data to a temporary text file
 
-Implements proper file cleanup using try-finally pattern
+### 3. Rename
+- Renames the temporary file during processing
 
-Technical Implementation
-Core Functions:
-get_character_data(): API client function with error handling
+### 4. Filter
+- Reads file contents
+- Displays only lines **excluding** those containing the letter **`i`**
 
-write_to_file(): File writer with UTF-8 encoding support
+### 5. Cleanup
+- Automatically deletes all generated files
+- Uses a `try–finally` pattern to guarantee cleanup
 
-read_and_filter_file(): Content filter and display function
+---
 
-main(): Orchestrates the complete workflow
+## File Operations
+- Creates temporary UTF-8 encoded text files
+- Writes structured data in a readable format
+- Renames files as part of the workflow
+- Ensures safe cleanup with context managers
 
-Code Quality Features:
-PEP8 compliant formatting
+---
 
-Type hints for better code clarity
+## Technical Implementation
 
-Comprehensive docstrings in English
+### Core Functions
+- **`get_character_data()`**
+  - API client function
+  - Handles network and HTTP errors
 
-Proper exception handling
+- **`write_to_file()`**
+  - Writes formatted data to a file
+  - Supports UTF-8 encoding
 
-Context managers for file operations
+- **`read_and_filter_file()`**
+  - Reads file content
+  - Filters out lines containing the letter `i`
 
-Workflow Example
-Fetch character #72 from API
+- **`main()`**
+  - Orchestrates the complete workflow
 
-Write data to temp_rick.txt
+---
 
-Rename to cool.txt
+## Code Quality Features
+- PEP 8–compliant formatting
+- Type hints for improved readability
+- Comprehensive docstrings (English)
+- Proper exception handling
+- Context managers for all file operations
 
-Filter and display lines without 'i'
+---
 
-Automatically delete the file
+## Example Workflow
+1. Fetch character **#72** from the API
+2. Write data to `temp_rick.txt`
+3. Rename file to `cool.txt`
+4. Display lines without the letter `i`
+5. Automatically delete the file
